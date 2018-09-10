@@ -15,11 +15,14 @@ sys.path.append(os.path.abspath(".."))
 
 from pads.sort.test import correctness_test, efficiency_test
 from pads.sort.bubble_sort import bubble_sort
+from pads.sort.insertion_sort import insertion_sort
+from pads.sort.shell_sort import shell_sort
 
 
 def main():
-    correctness_test(bubble_sort)
-    efficiency_test(bubble_sort)
+    for fn in [bubble_sort, insertion_sort, shell_sort]:
+        correctness_test(fn)
+        efficiency_test(fn)
 
 
 if __name__ == "__main__":
