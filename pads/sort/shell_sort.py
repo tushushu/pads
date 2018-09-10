@@ -7,52 +7,62 @@
 """
 
 
-def shell_sort(A):
-    N = len(A)
-    increment = N//2
+def shell_sort(nums, reverse):
+    """Shell sort.
 
+    Arguments:
+        nums {list} -- 1d list with int.
+
+    Keyword Arguments:
+        reverse {bool} -- The default is ascending sort. (default: {False})
+
+    Returns:
+        list -- 1d list with int.
+    """
+    return _shell_sort_desc(nums) if reverse else _shell_sort_asc(nums)
+
+
+def _shell_sort_asc(nums):
+    """Ascending shell sort.
+
+    Arguments:
+        nums {list} -- 1d list with int.
+
+    Returns:
+        list -- List in ascending order.
+    """
+
+    n = len(nums)
+    increment = n // 2
     while increment > 0:
-        i = increment
-
-        while i < N:
-            j = i - increment
-            tmp = A[i]
-
-            while j >= 0 and A[j] > tmp:
-                A[j + increment] = A[j]
-                j -= increment
-
-            A[j + increment] = tmp
-            i += 1
-
-        increment //= 2
-
-    return None
+        for i in range(increment, n):
+            for j in range(i - increment, -1, -increment):
+                if nums[j] > nums[j + increment]:
+                    nums[j], nums[j + increment] = nums[j + increment], nums[j]
+                else:
+                    break
+        increment = increment // 2
+    return nums
 
 
-"""
-test
-"""
+def _shell_sort_desc(nums):
+    """Descending shell sort.
 
-import random
-import copy
-import operator
+    Arguments:
+        nums {list} -- 1d list with int.
 
-k = 0
-res = 0
-t = 1000
+    Returns:
+        list -- List in descending order.
+    """
 
-while(k < t):
-    A = [random.randint(-5, 5) for x in range(100)]
-    B = copy.copy(A)
-
-    shell_sort(A)
-    B.sort()
-
-    res += int(operator.eq(A, B))
-    k += 1
-
-if res == t:
-    print("Pass!")
-else:
-    print("Wrong!")
+    n = len(nums)
+    increment = n // 2
+    while increment > 0:
+        for i in range(increment, n):
+            for j in range(i - increment, -1, -increment):
+                if nums[j] < nums[j + increment]:
+                    nums[j], nums[j + increment] = nums[j + increment], nums[j]
+                else:
+                    break
+        increment = increment // 2
+    return nums
