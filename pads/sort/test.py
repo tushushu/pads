@@ -57,4 +57,4 @@ def efficiency_test(fn, num_range=(0, 1000), len_range=(100, 200), n_tests=1000)
         fn(nums, reverse=reverse)
         run_time += time() - start
     ret = duration_transfer(run_time / n_tests)
-    print("Average runtime %s!" % ret)
+    print("Average runtime %s!\n" % ret)
