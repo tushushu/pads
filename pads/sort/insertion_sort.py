@@ -7,32 +7,16 @@
 """
 
 
-def insertion_sort(nums, reverse=False):
-    """Insertion sort.
-
-    Arguments:
-        nums {list} -- 1d list with int.
-
-    Keyword Arguments:
-        reverse {bool} -- The default is ascending sort. (default: {False})
-
-    Returns:
-        list -- 1d list with int.
-    """
-
-    return _insertion_sort_desc(nums) if reverse else _insertion_sort_asc(nums)
-
-
 def _insertion_sort_asc(nums):
     """Ascending insertion sort.
 
     Arguments:
-        nums {list} -- 1d list with int.
+        nums {list} -- 1d list with int or float.
 
     Returns:
         list -- List in ascending order.
     """
-    
+
     n = len(nums)
     for i in range(1, n):
         for j in range(i - 1, -1, -1):
@@ -47,7 +31,7 @@ def _insertion_sort_desc(nums):
     """Descending insertion sort.
 
     Arguments:
-        nums {list} -- 1d list with int.
+        nums {list} -- 1d list with int or float.
 
     Returns:
         list -- List in descending order.
@@ -61,3 +45,19 @@ def _insertion_sort_desc(nums):
             else:
                 break
     return nums
+
+
+def insertion_sort(nums, reverse=False):
+    """Insertion sort.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+
+    Keyword Arguments:
+        reverse {bool} -- The default is ascending sort. (default: {False})
+
+    Returns:
+        list -- List in order.
+    """
+
+    return _insertion_sort_desc(nums) if reverse else _insertion_sort_asc(nums)

@@ -18,7 +18,7 @@ def correctness_test(fn, num_range=(-10, 10), len_range=(0, 10), n_tests=10000):
 
     Keyword Arguments:
         num_range {tuple} -- The range of array elements. (default: {(-10, 10)})
-        len_range {tuple} -- The range of array lenght. (default: {(0, 10)})
+        len_range {tuple} -- The range of array length. (default: {(0, 10)})
         n_tests {int} -- Number of tests. (default: {10000})
     """
 
@@ -35,26 +35,25 @@ def correctness_test(fn, num_range=(-10, 10), len_range=(0, 10), n_tests=10000):
     print("Test passed!")
 
 
-def efficiency_test(fn, num_range=(0, 1000), len_range=(100, 200), n_tests=1000):
+def efficiency_test(fn, num_range=(0, 1000), length=1000, n_tests=100):
     """Test the efficiency of sorting algorithm.
 
     Arguments:
         fn {function} -- Sorting algorithm.
 
     Keyword Arguments:
-        num_range {tuple} -- The range of array elements. (default: {(0, 10000)})
-        len_range {tuple} -- The range of array lenght. (default: {(0, 100)})
-        n_tests {int} -- Number of tests. (default: {10000})
+        num_range {tuple} -- The range of array elements. (default: {(0, 1000)})
+        len {int} -- Array length. (default: {1000})
+        n_tests {int} -- Number of tests. (default: {100})
     """
 
     print("Testing efficiency of %s for %d times!" % (fn.__name__, n_tests))
     run_time = 0
     for _ in range(n_tests):
-        n = randint(*len_range)
-        nums = [randint(*num_range) for _ in range(n)]
+        nums = [randint(*num_range) for _ in range(length)]
         reverse = choice([True, False])
         start = time()
         fn(nums, reverse=reverse)
         run_time += time() - start
     ret = duration_transfer(run_time / n_tests)
-    print("Average runtime %s!\n" % ret)
+    print("Average runtime %s for length %d array!\n" % (ret, length))

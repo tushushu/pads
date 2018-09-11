@@ -7,26 +7,11 @@
 """
 
 
-def shell_sort(nums, reverse):
-    """Shell sort.
-
-    Arguments:
-        nums {list} -- 1d list with int.
-
-    Keyword Arguments:
-        reverse {bool} -- The default is ascending sort. (default: {False})
-
-    Returns:
-        list -- 1d list with int.
-    """
-    return _shell_sort_desc(nums) if reverse else _shell_sort_asc(nums)
-
-
 def _shell_sort_asc(nums):
     """Ascending shell sort.
 
     Arguments:
-        nums {list} -- 1d list with int.
+        nums {list} -- 1d list with int or float.
 
     Returns:
         list -- List in ascending order.
@@ -41,7 +26,7 @@ def _shell_sort_asc(nums):
                     nums[j], nums[j + increment] = nums[j + increment], nums[j]
                 else:
                     break
-        increment = increment // 2
+        increment //= 2
     return nums
 
 
@@ -49,7 +34,7 @@ def _shell_sort_desc(nums):
     """Descending shell sort.
 
     Arguments:
-        nums {list} -- 1d list with int.
+        nums {list} -- 1d list with int or float.
 
     Returns:
         list -- List in descending order.
@@ -64,5 +49,21 @@ def _shell_sort_desc(nums):
                     nums[j], nums[j + increment] = nums[j + increment], nums[j]
                 else:
                     break
-        increment = increment // 2
+        increment //= 2
     return nums
+
+
+def shell_sort(nums, reverse):
+    """Shell sort.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+
+    Keyword Arguments:
+        reverse {bool} -- The default is ascending sort. (default: {False})
+
+    Returns:
+        list -- List in order.
+    """
+
+    return _shell_sort_desc(nums) if reverse else _shell_sort_asc(nums)

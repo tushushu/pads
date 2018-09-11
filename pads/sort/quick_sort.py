@@ -7,23 +7,86 @@
 """
 
 
-def quick_sort(array):
-    l, r = 0, len(array) - 1
-    if l >= r:
-        return
-    stack = []
-    stack.append(l)
-    stack.append(r)
-    while stack:
-        low = stack.pop(0)
-        high = stack.pop(0)
-        if high - low <= 0:
-            continue
-        x = array[high]
-        i = low - 1
-        for j in range(low, high):
-            if array[j] <= x:
-                i += 1
-                array[i], array[j] = array[j], array[i]
-        array[i + 1], array[high] = array[high], array[i + 1]
-        stack.extend([low, i, i + 2, high])
+def _partition_asc(nums, low, high):
+    """Put the elements less than x on the left side 
+    of the array, and the rest on the right side.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+        low {int} -- Left index.
+        high {int} -- Right index.
+
+    Returns:
+        int -- The index of x.
+    """
+
+    i = low - 1
+    for j in range(low, high):
+        if nums[j] < nums[high]:
+            i += 1
+            nums[i], nums[j] = nums[j], nums[i]
+    nums[i + 1], nums[high] = nums[high], nums[i + 1]
+    return i + 1
+
+
+def _partition_desc(nums, low, high):
+    """Put the elements greater than x on the left side 
+    of the array, and the rest on the right side.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+        low {int} -- Left index.
+        high {int} -- Right index.
+
+    Returns:
+        int -- The index of x.
+    """
+
+    i = low - 1
+    for j in range(low, high):
+        if nums[j] > nums[high]:
+            i += 1
+            nums[i], nums[j] = nums[j], nums[i]
+    nums[i + 1], nums[high] = nums[high], nums[i + 1]
+    return i + 1
+
+
+def _quick_sort(nums, low, high, reverse):
+    """Recursive quick sort.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+        low {int} -- Left index.
+        high {int} -- Right index.
+        reverse {bool} -- Descending sort or not.
+
+    Returns:
+        list -- List in order.
+    """
+
+    if low < high:
+        if reverse:
+            mid = _partition_desc(nums, low, high)
+        else:
+            mid = _partition_asc(nums, low, high)
+        _quick_sort(nums, low, mid - 1, reverse)
+        _quick_sort(nums, mid + 1, high, reverse)
+    return nums
+
+
+def quick_sort(nums, reverse=False):
+    """Quick sort.
+
+    Arguments:
+        nums {list} -- 1d list with int or float.
+
+    Keyword Arguments:
+        reverse {bool} -- The default is ascending sort. (default: {False})
+
+    Returns:
+        list -- List in order.
+    """
+
+    low = 0
+    high = len(nums) - 1
+    return _quick_sort(nums, low, high, reverse)
