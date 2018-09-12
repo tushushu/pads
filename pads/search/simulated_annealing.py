@@ -5,36 +5,33 @@
 @Last Modified by:   tushushu
 @Last Modified time: 2018-09-11 15:01:23
 """
-from random import random, randint, choice, uniform
+from random import random, randint, uniform
 from math import exp, log
 
 
-def schedule(t, alpha, init_temp, speed):
+def schedule(t, alpha, init_temp, method):
     """Temperature schedule.
 
     Arguments:
         k {int} -- Time of annealing process.
         alpha {float} -- The exponential decay argument.
         init_temp {float} -- Initial temperature.
-        speed {int} -- Temperature schedule speed.
+        method {str} -- Temperature schedule method.
 
     Returns:
         float -- Temperature.
     """
 
-    assert speed in (1, 2, 3), "Parameter method must in (1, 2, 3)!"
+    assert method in ('exp', 'log'), "Parameter method must in ('exp', 'log')!"
     # Fast
-    if speed == 3:
+    if method == "exp":
         return init_temp * (alpha ** t)
-    # Medium
-    if speed == 2:
-        return init_temp / log(1 + alpha * t)
     # Slow
-    if speed == 1:
-        return init_temp / log(1 + t)
+    if method == "log":
+        return init_temp / log(1 + alpha * t)
 
 
-def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alpha=0.95, init_temp=1e4, speed=3):
+def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alpha=0.95, init_temp=1e4, method='exp'):
     """The simulated annealing algorithm.
 
     Arguments:
@@ -48,7 +45,7 @@ def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alph
         optimize {str} -- To get the maximum or minimum solution. (default: {"min"})
         alpha {float} -- The exponential decay argument. (default: {0.95})
         init_temp {float} -- Initial temperature. (default: {1e4})
-        speed {int} -- Temperature schedule speed. (default: {3})
+        method {str} -- Temperature schedule method. (default: {'exp'})
 
     Returns:
         float -- An approximate solution.
@@ -60,7 +57,7 @@ def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alph
     # Time
     t = 1
     # Initial temperature.
-    temp = schedule(t, alpha, init_temp, speed)
+    temp = schedule(t, alpha, init_temp, method)
     # Initial solution.
     x_min, x_max = domain
     x = uniform(x_min, x_max)
@@ -80,5 +77,5 @@ def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alph
                 if prob > random():
                     x = x_new
         t += 1
-        temp = schedule(t, alpha, init_temp, speed)
+        temp = schedule(t, alpha, init_temp, method)
     return x
