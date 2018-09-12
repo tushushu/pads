@@ -5,8 +5,6 @@
 @Last Modified by:   tushushu
 @Last Modified time: 2018-09-10 13:50:04
 """
-
-
 import os
 os.chdir(os.path.split(os.path.realpath(__file__))[0])
 
@@ -23,9 +21,11 @@ from pads.sort.select_sort import select_sort
 
 
 def main():
-    for fn in [select_sort, bubble_sort, insertion_sort, shell_sort, merge_sort, quick_sort]:
-        correctness_test(fn)
-        efficiency_test(fn)
+    for test_fn in [correctness_test, efficiency_test]:
+        print(test_fn.__name__)
+        for sort_fn in [select_sort, bubble_sort, insertion_sort, shell_sort, merge_sort, quick_sort]:
+            test_fn(sort_fn)
+            print()
 
 
 if __name__ == "__main__":

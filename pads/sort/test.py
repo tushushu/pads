@@ -56,4 +56,4 @@ def efficiency_test(fn, num_range=(0, 1000), length=1000, n_tests=100):
         fn(nums, reverse=reverse)
         run_time += time() - start
     ret = duration_transfer(run_time / n_tests)
-    print("Average runtime %s for length %d array!\n" % (ret, length))
+    print("Average runtime %s for length %d array!" % (ret, length))
