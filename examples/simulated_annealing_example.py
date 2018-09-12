@@ -16,9 +16,21 @@ from pads.search.simulated_annealing import simulated_annealing
 from math import sin, cos
 
 
+def quadratic(x):
+    return x**2 - 2 * x + 1
+
+
+def main():
+    functions = [sin, cos, quadratic]
+    domains = [(-3.14, 3.14), (-3.14, 3.14), (-100, 100)]
+    optimizes = ["min", "max", "min"]
+
+    for f,  domain, optimize in zip(functions, domains, optimizes):
+        print("Solve the minimum value of %s function:" % f.__name__)
+        ret = simulated_annealing(
+            fn=f, domain=domain, n_iter=1000, optimize=optimize)
+        print("The result is %.2f\n" % ret)
+
+
 if __name__ == "__main__":
-    print("Solve the minimum value of Sin function:")
-    print(simulated_annealing(sin, (-3.14, 3.14), 1000))
-    print()
-    print("Solve the minimum value of Cos function:")
-    print(simulated_annealing(cos, (-3.14, 3.14), 1000, optimize="max"))
+    main()

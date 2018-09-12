@@ -65,7 +65,7 @@ def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alph
     x_min, x_max = domain
     x = uniform(x_min, x_max)
     while temp >= min_temp:
-        for i in range(n_iter):
+        for _ in range(n_iter):
             # Choose a new solution randomly.
             x_new = x + uniform(-1, 1) * temp
             # If x is in the domain.
