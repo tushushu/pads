@@ -12,10 +12,11 @@ class Trie(object):
     """Trie class to match one or many strings.
 
     Properties:
-        tree {dict} -- Multi-level dict. Set the common prefix as key, end with "|".
-        e.g. words → tree
+        tree {dict} -- Multi-level dict. Set the common prefix as key,
+        end with "|". e.g. words → tree
         words: ["hi", "how", "high"]
-        tree: {"h": {"i": {"|": None, "g": {"h": {"|": None}}}, "o": {"w": {"|": None}}}}
+        tree: {"h": {"i": {"|": None, "g": {"h": {"|": None}}},
+        "o": {"w": {"|": None}}}}
     """
 
     def __init__(self, words):
