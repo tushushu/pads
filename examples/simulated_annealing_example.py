@@ -17,19 +17,33 @@ from math import sin, cos
 
 
 def quadratic(x):
-    return x**2 - 2 * x + 1
+    """Quadratic function.
+
+    Arguments:
+        x {int}
+
+    Returns:
+        int
+    """
+
+    return x**2 - 2*x + 1
+
+
+def absolute(x):
+    return abs(x)
 
 
 def main():
-    functions = [sin, cos, quadratic]
-    domains = [(-3.14, 3.14), (-3.14, 3.14), (-100, 100)]
-    optimizes = ["min", "max", "min"]
+    functions = [sin, cos, quadratic, absolute]
+    domains = [(-3.14, 3.14), (-3.14, 3.14), (-100, 100), (-10, 10)]
+    optimizes = ["min", "max", "min", "min"]
 
-    for f,  domain, optimize in zip(functions, domains, optimizes):
-        print("Solve the minimum value of %s function:" % f.__name__)
+    for f, domain, optimize in zip(functions, domains, optimizes):
+        print("Solve the %simum value of %s function:" %
+              (optimize, f.__name__))
         ret = simulated_annealing(
-            fn=f, domain=domain, n_iter=1000, optimize=optimize)
-        print("The result is %.2f\n" % ret)
+            fn=f, domain=domain, n_iter=10000, optimize=optimize)
+        print("The solution is %.2f\n" % ret)
 
 
 if __name__ == "__main__":
