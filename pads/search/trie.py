@@ -100,12 +100,19 @@ class Trie(object):
 
 def test():
     words = ["hi", "high", "good", "go", "how", "great", "nice"]
+    tree = Trie(words)
     test_cases = [
         ["hi", "hi", ["hi"]],
         ["high", "hi", ["hi", "high"]],
         ["", None, []],
-        ["like", None, []]
+        ["like", None, []],
+        ["nohighgood", "hi", ["hi", "high", "go", "good"]]
     ]
+    for test_case in test_cases:
+        s, one, many = test_case
+        assert tree.match_one(s) == one
+        assert all(a == b for a, b in zip(tree.match_many(s), many))
+    print("All the tests passed!")
 
 
 if __name__ == "__main__":
