@@ -5,7 +5,7 @@
 @Last Modified by:   tushushu
 @Last Modified time: 2018-09-11 15:01:23
 """
-from random import random, randint, uniform
+from random import random, uniform
 from math import exp, log
 
 
@@ -31,7 +31,8 @@ def schedule(t, alpha, init_temp, method):
         return init_temp / log(1 + alpha * t)
 
 
-def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alpha=0.95, init_temp=1e4, method='exp'):
+def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min",
+                        alpha=0.95, init_temp=1e4, method='exp'):
     """The simulated annealing algorithm.
 
     Arguments:
@@ -42,7 +43,8 @@ def simulated_annealing(fn, domain, n_iter, min_temp=1e-10, optimize="min", alph
 
     Keyword Arguments:
         min_temp {float} -- The minimum temperature. (default: {1e-10})
-        optimize {str} -- To get the maximum or minimum solution. (default: {"min"})
+        optimize {str} -- To get the maximum or minimum solution.
+        (default: {"min"})
         alpha {float} -- The exponential decay argument. (default: {0.95})
         init_temp {float} -- Initial temperature. (default: {1e4})
         method {str} -- Temperature schedule method. (default: {'exp'})

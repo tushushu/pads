@@ -23,7 +23,8 @@ from pads.sort.select_sort import select_sort
 def main():
     for test_fn in [correctness_test, efficiency_test]:
         print(test_fn.__name__)
-        for sort_fn in [select_sort, bubble_sort, insertion_sort, shell_sort, merge_sort, quick_sort]:
+        for sort_fn in [select_sort, bubble_sort, insertion_sort, shell_sort,
+                        merge_sort, quick_sort]:
             test_fn(sort_fn)
             print()
 

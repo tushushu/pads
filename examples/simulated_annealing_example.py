@@ -12,7 +12,7 @@ import sys
 sys.path.append(os.path.abspath(".."))
 
 
-from pads.search.simulated_annealing import simulated_annealing
+from pads.optimization.simulated_annealing import simulated_annealing
 from math import sin, cos
 
 
@@ -26,7 +26,7 @@ def quadratic(x):
         int
     """
 
-    return x**2 - 2*x + 1
+    return x ** 2 - 2 * x + 1
 
 
 def absolute(x):
