@@ -28,7 +28,7 @@ def df_dy(x, y):
 
 
 def main():
-    print("Solve the minimum value of quadratic function:")
+    print("Solving the minimum value of quadratic function:")
     n_variables = 2
     theta, f_theta = gradient_decent(f, [df_dx, df_dy], n_variables)
     theta = [round(x, 3) for x in theta]
