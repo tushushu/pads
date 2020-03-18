@@ -30,7 +30,7 @@ def _partition_asc(nums, low, high):
 
 
 def _partition_desc(nums, low, high):
-    """Put the elements greater than x on the left side 
+    """Put the elements greater than x on the left side
     of the array, and the rest on the right side.
 
     Arguments:
